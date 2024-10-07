@@ -3,7 +3,7 @@
 
 
 'use client'; // This makes the component a Client Component
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
@@ -17,7 +17,7 @@ import Toast from '@/app/components/Toast';
 import { useCart } from '@/app/context/CartContext';
 
 
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+//import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
