@@ -180,12 +180,12 @@ const Cart = () => {
           <div className="flex flex-col items-center">
             <FontAwesomeIcon icon={faTags} className="text-2xl mb-2 text-rose-400" />
             <h3 className="font-semibold">All year discount</h3>
-            <p>Looking for a deal? You can use the code "ALLYEAR" at checkout and get money off all year round.</p>
+            <p>Looking for a deal? You can use the code &quot;ALLYEAR&quot; at checkout and get money off all year round.</p>
           </div>
           <div className="flex flex-col items-center">
             <FontAwesomeIcon icon={faLeaf} className="text-2xl mb-2 text-rose-400" />
             <h3 className="font-semibold">For the planet</h3>
-            <p>We’ve pledged 1% of sales to the preservation and restoration of the natural environment.</p>
+            <p>We&apos;ve pledged 1% of sales to the preservation and restoration of the natural environment.</p>
           </div>
         </div>
       </article>

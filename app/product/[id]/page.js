@@ -252,14 +252,14 @@ const productChunks = chunkArray(mostPurchasedProducts, 4); // 4 products per sl
         >
           {[
             { quote: "I recently purchased a beautiful piece of art, and it has transformed my living room! The colors are vibrant and the quality is amazing.", name: "John, Kilimani" },
-            { quote: "My bedroom looks so much more lively now with this artwork! It's the best purchase I've made for my home decor.", name: "Monica, Runda" },
+            { quote: "My bedroom looks so much more lively now with this artwork! It&apos;s the best purchase I&apos;ve made for my home decor.", name: "Monica, Runda" },
             { quote: "The art piece fits perfectly in my office space. It adds a touch of creativity and professionalism to the environment.", name: "Alison, Lavington" },
-            { quote: "Absolutely love it! It's now the focal point of my living room, and I get so many compliments from visitors.", name: "Maryline, Loresho" },
+            { quote: "Absolutely love it! It&apos;s now the focal point of my living room, and I get so many compliments from visitors.", name: "Maryline, Loresho" },
             { quote: "This artwork brings such warmth and charm to my hallway. It truly feels like it was made for the space!", name: "Jonathan, Westlands" },
             { quote: "The colors are so vibrant and uplifting. Every morning when I walk into the dining room, it brightens my mood.", name: "Beatrice, Karen" },
-            { quote: "The piece adds a unique touch to our home office. We've received numerous compliments during video calls!", name: "David, Riverside" },
+            { quote: "The piece adds a unique touch to our home office. We&apos;ve received numerous compliments during video calls!", name: "David, Riverside" },
             { quote: "Our bedroom has completely transformed with this art. The detail and quality are simply remarkable!", name: "Esther, Kileleshwa" },
-            { quote: "This artwork adds life and sophistication to my living room. It's exactly what I needed to complete the space.", name: "Felix, Runda" },
+            { quote: "This artwork adds life and sophistication to my living room. It&apos;s exactly what I needed to complete the space.", name: "Felix, Runda" },
           ].map((item, index) => (
             <div key={index}>
               <p>"{item.quote}"</p>

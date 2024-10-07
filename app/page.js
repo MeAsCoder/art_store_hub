@@ -142,7 +142,7 @@ export default function Home() {
     {/* Headings */}
     <div className="flex text-center">
   <Link href="/" className="text-l mr-20 font-bold hover:text-rose-500">
-    <h2>What's New</h2>
+    <h2>What&apos;s New</h2>
   </Link>
   <Link href="/" className="text-l text-black font-bold hover:text-rose-500">
     <h3>Flash Sale</h3>
@@ -180,7 +180,7 @@ export default function Home() {
     Our selection features high-quality, aesthetically pleasing artworks that are perfect for enhancing the ambiance of any space. 
     Whether you&apos;re looking to brighten up your living room, create a serene atmosphere in your bedroom, or find that perfect statement piece for your office, 
     we have something that will resonate with your unique style. Explore our diverse range of artistic expressions and let your walls tell a story. 
-    Each piece is not just art; it's an experience waiting to be brought into your home.
+    Each piece is not just art; it&apos;s an experience waiting to be brought into your home.
   </p>
 </article>
 
