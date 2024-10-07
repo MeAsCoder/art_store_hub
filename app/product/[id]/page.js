@@ -16,12 +16,16 @@ import Toast from '@/app/components/Toast';
 
 import { useCart } from '@/app/context/CartContext';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css'; // Import core Swiper styles
-import 'swiper/css/navigation'; // Import Swiper navigation styles
-import 'swiper/css/pagination'; // Import Swiper pagination styles
-import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper';
 
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 // Install Swiper modules
 SwiperCore.use([Navigation, Pagination, Autoplay]);
