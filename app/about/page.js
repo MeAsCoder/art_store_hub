@@ -23,7 +23,7 @@ const About = () => {
           <section className="text-center py-12">
             <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-rose-300">About ArtGalleryHub</h1>
             <p className="text-xl lg:text-2xl mb-6">
-              Discover the world’s finest original art paintings from talented artists.
+              Discover the world&apos;s finest original art paintings from talented artists.
             </p>
             <p className="text-lg max-w-3xl mx-auto">
               At ArtGalleryHub, we believe in connecting art lovers with unique, inspiring creations from artists worldwide. Each piece tells a story, captures emotions, and brings color and creativity into your life.
@@ -71,7 +71,7 @@ const About = () => {
       <h3 className="text-2xl font-semibold mb-4 text-center">Our Art Sampling Process</h3>
       <FontAwesomeIcon icon={faStar} className="text-rose-300 text-4xl mb-4 flex" />
       </div>
-      <p className="text-lg mb-4">To ensure that every piece of art in our gallery reflects the highest quality and creativity, we have implemented a rigorous sampling process. Here’s how we ensure only the best pieces are displayed:</p>
+      <p className="text-lg mb-4">To ensure that every piece of art in our gallery reflects the highest quality and creativity, we have implemented a rigorous sampling process. Here&apos;s how we ensure only the best pieces are displayed:</p>
      
       {/* Step 1 */}
       <div className="flex items-center mb-6">
@@ -123,7 +123,7 @@ const About = () => {
           <section className="py-12 text-center">
             <h2 className="text-3xl font-bold mb-6 text-rose-300">Our Mission</h2>
             <p className="text-lg max-w-4xl mx-auto">
-              Our mission is to make high-quality, original art accessible to everyone. Whether you're an art collector or simply looking to decorate your space, we’re here to help you find the perfect piece.
+              Our mission is to make high-quality, original art accessible to everyone. Whether You&apos;re an art collector or simply looking to decorate your space, we’re here to help you find the perfect piece.
             </p>
           </section>
 

@@ -178,7 +178,7 @@ export default function Home() {
   <p className="text-lg leading-relaxed italic text-center">
     Discover a curated collection of our best-selling art pieces, each crafted with meticulous attention to detail. 
     Our selection features high-quality, aesthetically pleasing artworks that are perfect for enhancing the ambiance of any space. 
-    Whether you're looking to brighten up your living room, create a serene atmosphere in your bedroom, or find that perfect statement piece for your office, 
+    Whether you&apos;re looking to brighten up your living room, create a serene atmosphere in your bedroom, or find that perfect statement piece for your office, 
     we have something that will resonate with your unique style. Explore our diverse range of artistic expressions and let your walls tell a story. 
     Each piece is not just art; it's an experience waiting to be brought into your home.
   </p>
@@ -261,7 +261,7 @@ export default function Home() {
 
           <p className="text-lg text-white mb-6 flex items-start">
           <FaRegLightbulb className="text-yellow-400 mr-2" />
-            Our commitment to quality doesn’t end with the selection process. We provide ongoing support to ensure that you are satisfied 
+            Our commitment to quality doesn&apos;t end with the selection process. We provide ongoing support to ensure that you are satisfied 
             with your purchase, and we are always available to assist you with any customizations or questions you may have.
           </p>
 
