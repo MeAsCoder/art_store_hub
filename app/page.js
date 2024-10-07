@@ -20,7 +20,7 @@ export default function Home() {
     // Fetch data from the API
     const fetchProducts = async () => {
       try {
-        const response = await fetch("https://localhost:9937/api/product/allProducts");
+        const response = await fetch("https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/allProducts");
         const data = await response.json();
         setProducts(data); // Set the fetched products array to state
       } catch (error) {
@@ -34,7 +34,7 @@ export default function Home() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('https://localhost:9937/api/product/allCategories');
+        const response = await fetch('https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/allCategories');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -52,7 +52,7 @@ export default function Home() {
 
   const fetchProducts = async (categoryId) => {
     try {
-      const response = await fetch(`https://localhost:9937/api/product/category/${categoryId}`);
+      const response = await fetch(`https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/category/${categoryId}`);
       if (!response.ok) {
         throw new Error('Failed to fetch products');
       }
