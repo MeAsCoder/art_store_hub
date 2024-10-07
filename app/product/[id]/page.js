@@ -3,7 +3,7 @@
 
 
 'use client'; // This makes the component a Client Component
-
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
