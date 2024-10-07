@@ -10,7 +10,7 @@ const useProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('https://localhost:9937/api/product/allProducts');
+        const response = await fetch('https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/allProducts');
         if (!response.ok) {
           throw new Error('Failed to fetch products');
         }

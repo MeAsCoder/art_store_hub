@@ -9,7 +9,7 @@ const ShopByCategory = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('https://localhost:9937/api/product/allCategories'); // Update this with your API endpoint
+        const response = await fetch('https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/allCategories'); // Update this with your API endpoint
         if (!response.ok) {
           throw new Error('Failed to fetch categories');
         }

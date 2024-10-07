@@ -11,7 +11,7 @@ const Carousel = () => {
     // Fetch product data from API
     const fetchProducts = async () => {
       try {
-        const response = await fetch("https://localhost:9937/api/product/allProducts");
+        const response = await fetch("https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/allProducts");
         const data = await response.json();
         
         console.log("Fetched data:", data); // Debug: Log fetched data
