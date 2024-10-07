@@ -39,7 +39,7 @@ SwiperCore.use([Navigation, Pagination, Autoplay]);
 
 // Function to fetch product details
 const fetchProductDetails = async (id) => {
-  const res = await fetch(`https://localhost:9937/api/product/products/${id}`);
+  const res = await fetch(`https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/products/${id}`);
   if (!res.ok) {
     throw new Error('Failed to fetch product details');
   }
@@ -47,7 +47,7 @@ const fetchProductDetails = async (id) => {
 };
 
 const fetchMostPurchasedProducts = async () => {
-  const res = await fetch('https://localhost:9937/api/product/allProducts'); // Adjust this endpoint for most purchased
+  const res = await fetch('https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/allProducts'); // Adjust this endpoint for most purchased
   if (!res.ok) {
     throw new Error('Failed to fetch most purchased products');
   }
