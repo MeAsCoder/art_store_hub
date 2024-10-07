@@ -5,16 +5,22 @@ import Navbar from "./components/Navbar";
 import Carousel from "./components/Carousel";
 import Footer from "./components/Footer";
 import ProductCard from "./components/ProductCard";
-import { FaCheckCircle, FaHeadset,FaRegLightbulb } from 'react-icons/fa';
+import { FaCheckCircle, FaHeadset,FaRegLightbulb,FaListUl, FaTag,FaChevronRight,FaBolt,FaFlash } from 'react-icons/fa';
+import Link from 'next/link';
+
 
 export default function Home() {
   const [products, setProducts] = useState([]); // Initialize state as an empty array
+  const [categories, setCategories] = useState([]);
+  const [hoveredCategory, setHoveredCategory] = useState(null); // To track which category is being hovered
+  const [hoveredproducts, setHoveredProducts] = useState([]);
+
 
   useEffect(() => {
     // Fetch data from the API
     const fetchProducts = async () => {
       try {
-        const response = await fetch("https://11d2-41-90-185-8.ngrok-free.app/api/product/allProducts");
+        const response = await fetch("https://localhost:9937/api/product/allProducts");
         const data = await response.json();
         setProducts(data); // Set the fetched products array to state
       } catch (error) {
@@ -25,12 +31,149 @@ export default function Home() {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('https://localhost:9937/api/product/allCategories');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setCategories(data); // Set fetched categories
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []); // Empty dependency array means this effect runs once on mount
+
+
+
+  const fetchProducts = async (categoryId) => {
+    try {
+      const response = await fetch(`https://localhost:9937/api/product/category/${categoryId}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+      const data = await response.json();
+      setHoveredProducts(data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  const handleMouseEnter = (category) => {
+    setHoveredCategory(category.categoryId);
+    fetchProducts(category.categoryId);
+  };
+
+  // Handle mouse leave to hide the products panel
+  const handleMouseLeave = () => {
+    setHoveredCategory(null); // Reset the hovered category
+  };
+
+
+
+
   return (
     <div>
-      
-      <Carousel />
+     <div className="mt-10"></div>     
 
-      <article className="text-gray-700 mt-4 mx-4 p-6 bg-gray-100 rounded-lg shadow-lg">
+      
+      <div className="flex h-screen">
+ 
+
+  {/* Left Sidebar */}
+  <div className="w-1/4 bg-slate-600 text-white p-4" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
+        <div className="flex items-center mb-4 sticky top-0 bg-rose-300">
+          <FaListUl className="mr-2" />
+          <h2 className="text-xl font-bold">Category</h2>
+        </div>
+        <nav>
+          <ul className="text-sm z-100">
+            {categories.length > 0 ? (
+              categories.map((category) => (
+                <li
+                  key={category.categoryId}
+                  className="relative mb-2"
+                  onMouseEnter={() => handleMouseEnter(category)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <a href={`/product_category/${category.categoryId}?name=${encodeURIComponent(category.categoryName)}`} className="block py-2 hover:bg-slate-500 flex items-center">
+                    <FaListUl className="mr-2" />
+                    {category.categoryName}
+                    <FaChevronRight className="ml-auto" />
+                  </a>
+
+                  {/* Submenu Panel for Products */}
+                  {hoveredCategory === category.categoryId && products.length > 0 && (
+                    <div
+                    className="absolute top-0 left-full w-64 bg-slate-700 text-white p-4 shadow-lg z-50"
+                    style={{ minHeight: '200px', transform: 'translateY(-100%)', right: '-10px' }} 
+                    >
+                      <h3 className="text-lg mb-2">Products</h3>
+                      <ul>
+                        {hoveredproducts.map((product) => (
+                          <li key={product.id} className="flex items-center mb-2">
+                            <img
+                              src={product.productImageUrl}
+                              alt={product.productName}
+                              className="w-12 h-12 object-cover mr-2"
+                            />
+                            <span>{product.productName}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </li>
+              ))
+            ) : (
+              <li>Loading categories...</li>
+            )}
+          </ul>
+        </nav>
+      </div>
+
+
+  {/* Right Content with Carousel */}
+  <div className="w-3/4 bg-white ml-5 ">
+    {/* Headings */}
+    <div className="flex text-center">
+  <Link href="/" className="text-l mr-20 font-bold hover:text-rose-500">
+    <h2>What's New</h2>
+  </Link>
+  <Link href="/" className="text-l text-black font-bold hover:text-rose-500">
+    <h3>Flash Sale</h3>
+  </Link>
+</div>
+
+    {/* Carousel */}
+    <div className="z-0">
+      <Carousel>
+        {products.map((product) => (
+          <Carousel.Item key={product.id}>
+            <img
+              src={product.productImageUrl} 
+              alt={product.productName} 
+              style={{ width: "100%", height: "400px", objectFit: "cover" }} 
+            />
+            <Carousel.Caption>
+              <h3>{product.productName}</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+        ))}
+      </Carousel>
+    </div>
+   
+
+   
+  </div>
+</div>
+
+
+      <article className="text-gray-700 mt-0 mx-4 p-6 bg-gray-100 rounded-lg shadow-lg">
   <h2 className="text-2xl font-semibold text-rose-400 mb-4 text-center">Discover Our Best-Selling Art</h2>
   <p className="text-lg leading-relaxed italic text-center">
     Discover a curated collection of our best-selling art pieces, each crafted with meticulous attention to detail. 
@@ -43,7 +186,30 @@ export default function Home() {
 
 
 
-        <article className="bg-slate-300">
+        <article className="bg-gray-100 mr-5 ml-5">
+
+  {/* Flash Sale Section */}
+  <div className="flex items-center justify-between p-4 bg-white mb-4">
+    <div className="flex items-center">
+      {/* Icon in a round background */}
+      <div className="flex items-center justify-center w-7 h-7 rounded-full bg-rose-400 mr-2">
+        <FaBolt className="text-sm text-white" /> {/* Flash Sale Icon */}
+      </div>
+      <h2 className="text-xl font-bold mr-4">Flash Sale</h2>
+      <div className="flex items-start">
+        <p className="text-lg mr-5">Ends in</p>
+        <span className="text-lg font-bold">
+          <span className="text-rose-400">00</span>
+          <span className="text-black">:</span>
+          <span className="text-rose-400">00</span>
+          <span className="text-black">:</span>
+          <span className="text-rose-400">00</span>
+        </span> {/* Countdown Timer */}
+      </div>
+    </div>
+  </div>
+
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-8">
         {products.length > 0 ? (
           products.map((product) => (
@@ -60,7 +226,7 @@ export default function Home() {
         style={{ backgroundImage: 'url(https://upload.wikimedia.org/wikipedia/commons/5/5c/Kenyan_oil_painting_01.jpg)' }}
       >
         {/* Optional content can go here */}
-
+          <article>
         <div className="bg-black bg-opacity-50 p-6 rounded-md text-center">
           <h2 className="text-3xl font-bold mb-4 text-rose-200 mt-10">Why Choose Our Art?</h2>
           <p className="text-lg text-white mb-6 flex items-start">
@@ -103,6 +269,7 @@ export default function Home() {
             Order a Customized Art
           </button>
         </div>
+        </article>
 
 
       </div>

@@ -3,23 +3,25 @@
 import { useState } from 'react'; // Import useState
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { toast,ToastContainer  } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   // State to store form values and errors
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    occupation: '',
-    dobDay: '',
-    dobMonth: '',
-    dobYear: '',
+   
+    userName: '',
+    passWord: '',
     email: '',
     country: '',
-    maritalStatus: '',
+    firstName: '',
     newsletter: false,
   });
 
+
+
   const [errors, setErrors] = useState({});
+  const [toastMessage, setToastMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -39,6 +41,7 @@ const Register = () => {
     return newErrors;
   };
 
+  /*
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
@@ -50,6 +53,74 @@ const Register = () => {
       console.log("Form submitted", formData);
     }
   };
+
+*/
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const validationErrors = validateForm();
+  if (Object.keys(validationErrors).length > 0) {
+    setErrors(validationErrors); // Set form validation errors
+  } else {
+    setErrors({}); // Clear errors if validation passes
+
+    try {
+      const response = await fetch("https://localhost:9937/api/user/register", {
+        method: "POST", // HTTP method
+        headers: {
+          "Content-Type": "application/json", // Specify the request is JSON
+        },
+        body: JSON.stringify(formData), // Send form data as JSON
+      });
+
+
+      const data = await response.json(); 
+
+
+      if (!response.ok) {
+        // If the username is taken, show the error from the response
+        if (response.status == 409) {
+          toast.error(data.error || "UserName already taken", {
+            position: "top-right",
+          });
+        } else {
+          toast.error(data.error || "An error occurred during registration",{
+            position : "top-right",
+
+          });
+        
+      }
+    }
+
+      else {
+        console.log("Form submitted successfully", data);
+        toast.success("Registered successfully!", {
+          position: "top-right", // Use string instead of accessing POSITION
+        });
+  
+        setFormData({
+          userName: '',
+          passWord: '',
+          email: '',
+          country: '',
+          firstName: '',
+          newsletter: false,
+        });
+      }
+    
+
+      // Optionally handle successful registration here (e.g., redirect, display message)
+    } catch (error) {
+      console.error("Error submitting the form:", error);
+      // Optionally set an error state to display in the UI
+      toast.error("Registration failed. Please try again.", {
+        position: 'top-right',
+      });
+    }
+  }
+};
+
+
 
   return (
     <div>
@@ -63,7 +134,7 @@ const Register = () => {
             {/* First Name */}
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
-                First Name
+                Name
               </label>
               <input
                 className={`input input-bordered w-full ${errors.firstName ? 'border-red-500' : ''}`}
@@ -77,97 +148,25 @@ const Register = () => {
               {errors.firstName && <p className="text-red-500 text-xs italic">{errors.firstName}</p>}
             </div>
 
-            {/* Last Name */}
+            {/* UserName */}
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
-                Last Name
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="userName">
+                UserName
               </label>
               <input
-                className={`input input-bordered w-full ${errors.lastName ? 'border-red-500' : ''}`}
-                id="lastName"
-                name="lastName"
+                className={`input input-bordered w-full ${errors.userName ? 'border-red-500' : ''}`}
+                id="userName"
+                name="userName"
                 type="text"
-                placeholder="Your Last Name"
-                value={formData.lastName}
+                placeholder="Your User Name"
+                value={formData.userName}
                 onChange={handleChange}
               />
-              {errors.lastName && <p className="text-red-500 text-xs italic">{errors.lastName}</p>}
+              {errors.userName && <p className="text-red-500 text-xs italic">{errors.userName}</p>}
             </div>
 
-            {/* Occupation */}
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="occupation">
-                Occupation
-              </label>
-              <select
-                className={`select select-bordered w-full ${errors.occupation ? 'border-red-500' : ''}`}
-                id="occupation"
-                name="occupation"
-                value={formData.occupation}
-                onChange={handleChange}
-              >
-                <option value="">Select Occupation</option>
-                <option value="Engineer">Engineer</option>
-                <option value="Doctor">Doctor</option>
-                <option value="Teacher">Teacher</option>
-                <option value="Artist">Artist</option>
-                {/* Add more options as needed */}
-              </select>
-              {errors.occupation && <p className="text-red-500 text-xs italic">{errors.occupation}</p>}
-            </div>
-
-            {/* Date of Birth */}
-            <div className="mb-4 grid grid-cols-3 gap-2">
-              <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="dobDay">
-                  Day
-                </label>
-                <input
-                  className={`input input-bordered w-full ${errors.dobDay ? 'border-red-500' : ''}`}
-                  id="dobDay"
-                  name="dobDay"
-                  type="number"
-                  placeholder="DD"
-                  min="1"
-                  max="31"
-                  value={formData.dobDay}
-                  onChange={handleChange}
-                />
-                {errors.dobDay && <p className="text-red-500 text-xs italic">{errors.dobDay}</p>}
-              </div>
-              <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="dobMonth">
-                  Month
-                </label>
-                <input
-                  className={`input input-bordered w-full ${errors.dobMonth ? 'border-red-500' : ''}`}
-                  id="dobMonth"
-                  name="dobMonth"
-                  type="number"
-                  placeholder="MM"
-                  min="1"
-                  max="12"
-                  value={formData.dobMonth}
-                  onChange={handleChange}
-                />
-                {errors.dobMonth && <p className="text-red-500 text-xs italic">{errors.dobMonth}</p>}
-              </div>
-              <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="dobYear">
-                  Year
-                </label>
-                <input
-                  className={`input input-bordered w-full ${errors.dobYear ? 'border-red-500' : ''}`}
-                  id="dobYear"
-                  name="dobYear"
-                  type="number"
-                  placeholder="YYYY"
-                  value={formData.dobYear}
-                  onChange={handleChange}
-                />
-                {errors.dobYear && <p className="text-red-500 text-xs italic">{errors.dobYear}</p>}
-              </div>
-            </div>
+           
+                     
 
             {/* Email */}
             <div className="mb-4">
@@ -184,6 +183,22 @@ const Register = () => {
                 onChange={handleChange}
               />
               {errors.email && <p className="text-red-500 text-xs italic">{errors.email}</p>}
+            </div>
+            {/*Password field*/}
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="passWord">
+                Password
+              </label>
+              <input
+                className={`input input-bordered w-full ${errors.passWord ? 'border-red-500' : ''}`}
+                id="passWord"
+                name="passWord"
+                type="passWord"
+                placeholder="Your Password"
+                value={formData.passWord}
+                onChange={handleChange}
+              />
+              {errors.passWord && <p className="text-red-500 text-xs italic">{errors.passWord}</p>}
             </div>
 
             {/* Country of Residence */}
@@ -208,26 +223,7 @@ const Register = () => {
               {errors.country && <p className="text-red-500 text-xs italic">{errors.country}</p>}
             </div>
 
-            {/* Marital Status */}
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="maritalStatus">
-                Marital Status
-              </label>
-              <select
-                className={`select select-bordered w-full ${errors.maritalStatus ? 'border-red-500' : ''}`}
-                id="maritalStatus"
-                name="maritalStatus"
-                value={formData.maritalStatus}
-                onChange={handleChange}
-              >
-                <option value="">Select Status</option>
-                <option value="single">Single</option>
-                <option value="married">Married</option>
-                <option value="divorced">Divorced</option>
-                {/* Add more statuses as needed */}
-              </select>
-              {errors.maritalStatus && <p className="text-red-500 text-xs italic">{errors.maritalStatus}</p>}
-            </div>
+          
 
             {/* Newsletter Subscription */}
             <div className="mb-4 flex items-center">

@@ -32,7 +32,7 @@ const ShopByCategory = () => {
             <Link key={category.categoryId} href={`/products/${category.categoryId}`}>
               <div className="flex-shrink-0 w-64 p-4 bg-white shadow-lg rounded-lg hover:shadow-xl transition-shadow duration-300">
                 <img
-                  src={category.categoryImageUrl} // Assuming category has an image URL
+                  src={category.imageUrl} // Assuming category has an image URL
                   alt={category.categoryName}
                   className="h-40 w-full object-cover rounded-lg mb-4"
                 />

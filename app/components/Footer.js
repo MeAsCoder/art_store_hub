@@ -2,7 +2,7 @@ import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-700 text-white p-8">
+    <footer className="bg-slate-500 text-white p-8">
       <div className="container mx-auto">
         {/* Main Content Flexbox */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">

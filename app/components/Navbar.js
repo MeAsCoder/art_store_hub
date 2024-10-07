@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCartPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 //import useCart from '../context/CartContext';
 import { useCart } from '../context/CartContext';
@@ -25,10 +26,6 @@ const Navbar = () => {
 
 
 
- 
-
-
-
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -37,7 +34,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('https://11d2-41-90-185-8.ngrok-free.app/api/product/allCategories');
+        const response = await fetch('https://localhost:9937/api/product/allCategories');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -50,6 +47,9 @@ const Navbar = () => {
 
     fetchCategories();
   }, []); // Empty dependency array means this effect runs once on mount
+
+  
+ 
 
 
   useEffect(() => {
@@ -106,9 +106,11 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar bg-slate-600 text-white">
-        <div className="flex-1 text-rose-300">
+
+      <div className="navbar bg-slate-500 text-black flex justify-between">
+      <div className="text-rose-400">
           <Link href="/" className="btn btn-ghost normal-case text-xl ">
+          <FontAwesomeIcon icon={faShoppingCart} /> {/* Added cart icon */}
             ArtGalleryHub
           </Link>
         </div>
@@ -138,9 +140,7 @@ const Navbar = () => {
               )}
             </li>
 
-            <li>
-              <Link href="/shop-by-category">PAGES</Link>
-            </li>
+           
             <li>
               <Link href="/contacts">CONTACT US</Link>
             </li>
@@ -221,13 +221,22 @@ const Navbar = () => {
 
      {isSearchVisible && (
         <div className="bg-gray-100 p-4 text-black shadow-lg rounded mt-4 mx-4">
+          <div className='flex'>
           <input
             type="text"
-            placeholder="Search products..."
+            placeholder="I am looking for..."
             value={searchQuery}
             onChange={handleSearchInputChange}
             className="px-4 py-2 border border-gray-300 rounded-l w-full"
           />
+           <button className="px-4 py-2 bg-rose-400 border border-rose-400 rounded-r hover:bg-rose-300">
+    
+           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m1.95-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
+            </svg>
+            </button>
+        </div>
+
           {filteredProducts.length > 0 ? (
             <ul className="bg-white text-black shadow-lg rounded p-2 mt-2 w-full">
               {filteredProducts.map((product) => (

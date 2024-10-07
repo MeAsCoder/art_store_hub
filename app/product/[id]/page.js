@@ -20,7 +20,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css'; // Import core Swiper styles
 import 'swiper/css/navigation'; // Import Swiper navigation styles
 import 'swiper/css/pagination'; // Import Swiper pagination styles
-import { Swiper as SwiperCore,Navigation, Pagination, Autoplay } from 'swiper/modules'; 
+import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper';
+
 
 // Install Swiper modules
 SwiperCore.use([Navigation, Pagination, Autoplay]);
@@ -273,7 +274,7 @@ const productChunks = chunkArray(mostPurchasedProducts, 4); // 4 products per sl
 
 
     {toastMessage && <Toast message={toastMessage} onClose={handleToastClose} />}
-    <Footer />
+  
   </div>
   
 
