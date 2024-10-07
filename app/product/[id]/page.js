@@ -262,7 +262,7 @@ const productChunks = chunkArray(mostPurchasedProducts, 4); // 4 products per sl
             { quote: "This artwork adds life and sophistication to my living room. It&apos;s exactly what I needed to complete the space.", name: "Felix, Runda" },
           ].map((item, index) => (
             <div key={index}>
-              <p>"{item.quote}"</p>
+              <p>&quot;{item.quote}&quot;</p>
               <p className="mt-2 text-sm text-gray-500">— {item.name}</p>
             </div>
           ))}
