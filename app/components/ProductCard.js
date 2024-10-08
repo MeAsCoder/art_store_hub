@@ -97,7 +97,7 @@ const ProductCard = ({ product }) => {
       />
       <div className=" bg-red-100 absolute inset-0 flex items-center justify-end transition-transform duration-300 transform translate-x-full group-hover:translate-x-0">
         <div className="p-4">
-        <Link href={`/product_details/${product.id}`}>
+        <Link href={`/product/${product.id}`}>
           <h3 className="text-rose-400 text-lg font-bold cursor-pointer hover:underline">{product.name}</h3>
           <p className="text-rose-400">${product.price.toFixed(2)}</p>
           </Link>

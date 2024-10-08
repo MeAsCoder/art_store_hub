@@ -43,6 +43,7 @@ const fetchMostPurchasedProducts = async () => {
 
 const ProductDetails = () => {
   const  {id}  = useParams(); // Get the dynamic product ID
+  console.log("Product ID from route:", id);
   //const { id } = useParams(); 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -51,9 +52,7 @@ const ProductDetails = () => {
   const{addToCart} = useCart();
   const[mostPurchasedProducts, setMostPurchasedProducts] = useState([]);
 
-  useEffect(() => {
-    console.log("Product ID from route:", id);
-  }, [id]);
+ 
 
   useEffect(() => {
     if (id) {
@@ -74,6 +73,8 @@ const ProductDetails = () => {
         }
       };
       fetchProductDetails();
+    } else{
+      console.log("No ID received"  )
     }
   }, [id]);
   
