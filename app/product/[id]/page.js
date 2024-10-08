@@ -64,7 +64,8 @@ const ProductDetails = ({ params }) => {
   const[mostPurchasedProducts, setMostPurchasedProducts] = useState([]);
 
   useEffect(() => {
-    if (id) {
+    if (id) {a
+      console.log("ID: " + id )
       // Fetch products for the selected category
       const fetchProductDetails = async () => {
         try {
