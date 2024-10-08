@@ -61,6 +61,10 @@ const ProductDetails = ({ params }) => {
   const[mostPurchasedProducts, setMostPurchasedProducts] = useState([]);
 
   useEffect(() => {
+    console.log("Product ID from route:", id);
+  }, [id]);
+
+  useEffect(() => {
     if (id) {
       console.log("ID: " + id )
       // Fetch products for the selected category
