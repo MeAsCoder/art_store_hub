@@ -36,7 +36,6 @@ SwiperCore.use([Navigation, Pagination, Autoplay]);
 
 
 
-
 // Function to fetch product details
 const fetchProductDetails = async (id) => {
   const res = await fetch(`https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/products/${id}`);
@@ -54,14 +53,37 @@ const fetchMostPurchasedProducts = async () => {
   return res.json();
 };
 
-const ProductDetails = () => {
-  const { id } = useParams(); // Get the dynamic product ID
+const ProductDetails = ({ params }) => {
+  const { id } = params; // Get the dynamic product ID
+  //const { id } = useParams(); 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1); // State for quantity
   const [toastMessage, setToastMessage] = useState('');
   const{addToCart} = useCart();
   const[mostPurchasedProducts, setMostPurchasedProducts] = useState([]);
+
+  useEffect(() => {
+    if (id) {
+      // Fetch products for the selected category
+      const fetchProductDetails = async () => {
+        try {
+          const response = await fetch(`https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/products/${id}`);
+          if (!response.ok) {
+            throw new Error('Failed to fetch products');
+          }
+          const productDetails = await response.json();
+          setProduct(productDetails);
+        } catch (error) {
+          console.error('Error fetching products:', error);
+        }
+      };
+      fetchProductDetails();
+    }
+  }, [id]);
+  
+
+  /*
 
   useEffect(() => {
     const getProductDetails = async () => {
@@ -78,6 +100,7 @@ const ProductDetails = () => {
     getProductDetails();
   }, [id]);
 
+  */
 
   useEffect(() => {
     const getMostPurchasedProducts = async () => {
