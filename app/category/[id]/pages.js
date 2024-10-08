@@ -13,7 +13,7 @@ const CategoryDetails = ({ params }) => {
       // Fetch products for the selected category
       const fetchProductsByCategory = async () => {
         try {
-          const response = await fetch(`https://localhost:9937/api/product/category/${id}`);
+          const response = await fetch(`https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/category/${id}`);
           if (!response.ok) {
             throw new Error('Failed to fetch products');
           }
