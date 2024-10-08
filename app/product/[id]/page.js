@@ -33,15 +33,6 @@ SwiperCore.use([Navigation, Pagination, Autoplay]);
 
 
 
-// Function to fetch product details
-const fetchProductDetails = async (id) => {
-  const res = await fetch(`https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/products/${id}`);
-  if (!res.ok) {
-    throw new Error('Failed to fetch product details');
-  }
-  return res.json();
-};
-
 const fetchMostPurchasedProducts = async () => {
   const res = await fetch('https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/allProducts'); // Adjust this endpoint for most purchased
   if (!res.ok) {
@@ -50,8 +41,8 @@ const fetchMostPurchasedProducts = async () => {
   return res.json();
 };
 
-const ProductDetails = ({ params }) => {
-  const { id } = params; // Get the dynamic product ID
+const ProductDetails = () => {
+  const  {id}  = useParams(); // Get the dynamic product ID
   //const { id } = useParams(); 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -67,7 +58,7 @@ const ProductDetails = ({ params }) => {
   useEffect(() => {
     if (id) {
       console.log("ID: " + id )
-      // Fetch products for the selected category
+      // Fetch products for the selected id 
       const fetchProductDetails = async () => {
         try {
           const response = await fetch(`https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/products/${id}`);
@@ -78,6 +69,8 @@ const ProductDetails = ({ params }) => {
           setProduct(productDetails);
         } catch (error) {
           console.error('Error fetching products:', error);
+        }finally{
+          setLoading(false);
         }
       };
       fetchProductDetails();
@@ -150,7 +143,7 @@ const productChunks = chunkArray(mostPurchasedProducts, 4); // 4 products per sl
 
   return (
     <div> 
-    <Breadcrumb productName={product.name} />
+    <Breadcrumb productName={product?.name} />
   
     <div className="container mx-auto mt-6 flex space-x-8">
       {/* Left Section: Image and Product Info */}
@@ -158,8 +151,8 @@ const productChunks = chunkArray(mostPurchasedProducts, 4); // 4 products per sl
         <div className="relative group overflow-hidden rounded-lg shadow-lg">
           {/* Image with zoom effect */}
           <img
-            src={product.productImageUrl}
-            alt={product.name}
+            src={product?.productImageUrl}
+            alt={product?.name}
             className="w-full h-80 object-cover transition-transform duration-300 transform group-hover:scale-110"
           />
           
