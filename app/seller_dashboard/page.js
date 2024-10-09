@@ -55,7 +55,7 @@ const SellerDashboard = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('https://localhost:9937/api/product/allCategories');
+        const response = await axios.get('https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/allCategories');
         setCategories(response.data); // Assuming the response contains an array of categories
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -73,7 +73,7 @@ const SellerDashboard = () => {
   const handleNewOrderSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://localhost:9937/api/product/restock', {
+      const response = await axios.post('https://spring-boot-art-store-hub-f1791b81256c.herokuapp.com/api/product/restock', {
         productName: newProduct.productName,
         productPrice: parseFloat(newProduct.productPrice),
         productDescription: newProduct.productDescription,
@@ -378,7 +378,7 @@ const SellerDashboard = () => {
                 >
                   <option value="">Select a category</option>
                   {categories.map((category) => (
-                    <option key={category.id} value={category.id}>{category.categoryName}</option>
+                    <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>
                   ))}
                 </select>
               </div>
