@@ -27,7 +27,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 // Install Swiper modules
-SwiperCore.use([Navigation, Pagination, Autoplay]);
+//SwiperCore.use([Navigation, Pagination, Autoplay]);
 
 
 
