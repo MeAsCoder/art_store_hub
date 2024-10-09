@@ -23,6 +23,10 @@ export default function Home() {
     seconds: 0,
   });
 
+   // Fixed flash sale start date (e.g., sale started on 1st Oct 2024)
+   const flashSaleStartDate = new Date('2024-10-01T00:00:00'); // Set the start date of the flash sale
+   const flashSaleDurationDays = 10; // Duration of the flash sale in days
+
 
   useEffect(() => {
     // Fetch data from the API
@@ -84,8 +88,8 @@ export default function Home() {
 
     // Countdown Timer logic
     useEffect(() => {
-      const targetDate = new Date(); // Get the current date
-      targetDate.setDate(targetDate.getDate() + 10); // Set the target date to 10 days from now
+      const targetDate = new Date(flashSaleStartDate.getTime());
+      targetDate.setDate(targetDate.getDate() + flashSaleDurationDays); // Calculate the end date of the sale
   
       const updateTimer = () => {
         const currentTime = new Date();
@@ -117,7 +121,6 @@ export default function Home() {
   
       return () => clearInterval(timer); // Cleanup the interval on component unmount
     }, []);
-  
 
 
 
