@@ -16,6 +16,14 @@ export default function Home() {
   const [hoveredproducts, setHoveredProducts] = useState([]);
 
 
+  const [timeLeft, setTimeLeft] = useState({
+    days: 10,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+
   useEffect(() => {
     // Fetch data from the API
     const fetchProducts = async () => {
@@ -73,6 +81,43 @@ export default function Home() {
     setHoveredCategory(null); // Reset the hovered category
   };
 
+
+    // Countdown Timer logic
+    useEffect(() => {
+      const targetDate = new Date(); // Get the current date
+      targetDate.setDate(targetDate.getDate() + 10); // Set the target date to 10 days from now
+  
+      const updateTimer = () => {
+        const currentTime = new Date();
+        const difference = targetDate - currentTime;
+  
+        if (difference > 0) {
+          const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+          const minutes = Math.floor((difference / 1000 / 60) % 60);
+          const seconds = Math.floor((difference / 1000) % 60);
+  
+          setTimeLeft({
+            days,
+            hours,
+            minutes,
+            seconds,
+          });
+        } else {
+          setTimeLeft({
+            days: 0,
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+          });
+        }
+      };
+  
+      const timer = setInterval(updateTimer, 1000); // Update the timer every second
+  
+      return () => clearInterval(timer); // Cleanup the interval on component unmount
+    }, []);
+  
 
 
 
@@ -190,24 +235,26 @@ export default function Home() {
 
   {/* Flash Sale Section */}
   <div className="flex items-center justify-between p-4 bg-white mb-4">
-    <div className="flex items-center">
-      {/* Icon in a round background */}
-      <div className="flex items-center justify-center w-7 h-7 rounded-full bg-rose-400 mr-2">
-        <FaBolt className="text-sm text-white" /> {/* Flash Sale Icon */}
-      </div>
-      <h2 className="text-xl font-bold mr-4">Flash Sale</h2>
-      <div className="flex items-start">
-        <p className="text-lg mr-5">Ends in</p>
-        <span className="text-lg font-bold">
-          <span className="text-rose-400">00</span>
-          <span className="text-black">:</span>
-          <span className="text-rose-400">00</span>
-          <span className="text-black">:</span>
-          <span className="text-rose-400">00</span>
-        </span> {/* Countdown Timer */}
-      </div>
-    </div>
-  </div>
+            <div className="flex items-center">
+              {/* Icon in a round background */}
+              <div className="flex items-center justify-center w-7 h-7 rounded-full bg-rose-400 mr-2">
+                <FaBolt className="text-sm text-white" /> {/* Flash Sale Icon */}
+              </div>
+              <h2 className="text-xl font-bold mr-4">Flash Sale</h2>
+              <div className="flex items-start">
+                <p className="text-lg mr-5">Ends in</p>
+                <span className="text-lg font-bold">
+                  <span className="text-rose-400">{String(timeLeft.days).padStart(2, '0')}</span>
+                  <span className="text-black">:</span>
+                  <span className="text-rose-400">{String(timeLeft.hours).padStart(2, '0')}</span>
+                  <span className="text-black">:</span>
+                  <span className="text-rose-400">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                  <span className="text-black">:</span>
+                  <span className="text-rose-400">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                </span> {/* Countdown Timer */}
+              </div>
+            </div>
+          </div> 
 
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-8">
