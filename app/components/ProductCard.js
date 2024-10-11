@@ -74,6 +74,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 //import useCart from '../context/CartContext'; // Correcting this to match default export
 import { useCart } from '../context/CartContext';
+import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
+import { faThumbsDown as faThumbsDownSolid } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsDown as faThumbsDownRegular } from '@fortawesome/free-regular-svg-icons';
 
 
 
@@ -81,11 +85,24 @@ const ProductCard = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [toastMessage, setToastMessage] = useState("");
   const { addToCart } = useCart(); // Get addToCart from context
+  const [liked, setLiked] = useState(false);
+  const [disliked, setDisliked] = useState(false);
+  const [likesQuantity, setLikesQuantity] = useState(1);
 
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
     setToastMessage(`Added ${quantity} of ${product.name} to cart.`);
+  };
+
+  const handleLike = () => {
+    setLiked(true);
+    setDisliked(false); // Dislike is automatically canceled
+  };
+
+  const handleDislike = () => {
+    setDisliked(true);
+    setLiked(false); // Like is automatically canceled
   };
 
   return (
@@ -95,11 +112,11 @@ const ProductCard = ({ product }) => {
         alt={product.name}
         className="w-full h-48 object-cover"
       />
-      <div className=" bg-red-100 absolute inset-0 flex items-center justify-end transition-transform duration-300 transform translate-x-full group-hover:translate-x-0">
+      <div className="bg-red-100 absolute inset-0 flex items-center justify-end transition-transform duration-300 transform translate-x-full group-hover:translate-x-0">
         <div className="p-4">
-        <Link href={`/product/${product.id}`}>
-          <h3 className="text-rose-400 text-lg font-bold cursor-pointer hover:underline">{product.name}</h3>
-          <p className="text-rose-400">${product.price.toFixed(2)}</p>
+          <Link href={`/product/${product.id}`}>
+            <h3 className="text-rose-400 text-lg font-bold cursor-pointer hover:underline">{product.name}</h3>
+            <p className="text-rose-400">${product.price.toFixed(2)}</p>
           </Link>
           <div className="flex items-center mt-2">
             <input
@@ -114,6 +131,20 @@ const ProductCard = ({ product }) => {
               className="ml-2 bg-rose-400 text-white px-3 py-1 rounded hover:bg-rose-200 transition-colors"
             >
               Add to Cart
+            </button>
+          </div>
+          <div className="flex items-center mt-2">
+            <button onClick={handleLike} className="mr-2">
+              <FontAwesomeIcon
+                icon={liked ? faHeartSolid : faHeartRegular}
+                className={`text-red-500 ${liked ? 'text-red-600' : 'text-gray-400'}`}
+              />
+            </button>
+            <button onClick={handleDislike}>
+              <FontAwesomeIcon
+                icon={disliked ? faThumbsDownSolid : faThumbsDownRegular}
+                className={`text-red-500 ${disliked ? 'text-red-600' : 'text-gray-400'}`}
+              />
             </button>
           </div>
         </div>

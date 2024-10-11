@@ -219,7 +219,7 @@ const productChunks = chunkArray(mostPurchasedProducts, 4); // 4 products per sl
             <SwiperSlide key={index}>
               <div className="grid grid-cols-4 gap-6">
                 {chunk.map((product) => (
-                  <div key={product.id} className="bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow">
+                  <div key={product.id} className="bg-white p-4 shadow-md rounded-lg hover:shadow-lg transition-shadow duration-200 ease-in-out hover:shadow-lg hover:scale-110">
                     <div className="h-48 bg-gray-200 rounded mb-4">
                       <img
                         src={product.productImageUrl} // Use actual field from your API response
@@ -227,7 +227,10 @@ const productChunks = chunkArray(mostPurchasedProducts, 4); // 4 products per sl
                         className="w-full h-full object-cover rounded"
                       />
                     </div>
+                    <Link  href="/" > 
                     <h3 className="text-lg font-semibold text-gray-800 mb-2">{product.productName}</h3>
+                    </Link>
+                   
                     <p className="text-rose-400">${product.price.toFixed(2)}</p>
                   </div>
                 ))}

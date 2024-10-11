@@ -338,114 +338,178 @@ const SellerDashboard = () => {
           </div>
         )}
 
-        {activeSection === 'makeNewOrder' && (
-          <div>
-            <h2 className="text-3xl font-bold mb-6">Make New Order</h2>
-            <form onSubmit={handleNewOrderSubmit} className="space-y-4 bg-white p-6 rounded-lg shadow mb-10">
-              <div>
-                <label htmlFor="productName" className="block text-lg font-semibold mb-1">Product Name</label>
-                <input
-                  type="text"
-                  id="productName"
-                  name="productName"
-                  value={newProduct.productName}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="productImageUrl" className="block text-lg font-semibold mb-1">Image URL</label>
-                <input
-                  type="text"
-                  id="productImageUrl"
-                  name="productImageUrl"
-                  value={newProduct.productImageUrl}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="categoryId" className="block text-lg font-semibold mb-1">Category</label>
-                <select
-                  id="categoryId"
-                  name="categoryId"
-                  value={newProduct.categoryId}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  required
-                >
-                  <option value="">Select a category</option>
-                  {categories.map((category) => (
-                    <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label htmlFor="productDescription" className="block text-lg font-semibold mb-1">Description</label>
-                <textarea
-                  id="productDescription"
-                  name="productDescription"
-                  value={newProduct.productDescription}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="productPrice" className="block text-lg font-semibold mb-1">Price</label>
-                <input
-                  type="number"
-                  id="productPrice"
-                  name="productPrice"
-                  value={newProduct.productPrice}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  required
-                  min="0"
-                />
-              </div>
-              <div>
-                <label htmlFor="createdDate" className="block text-lg font-semibold mb-1">Created Date</label>
-                <input
-                  type="date"
-                  id="createdDate"
-                  name="createdDate"
-                  value={newProduct.createdDate}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="deliveryTimeSpan" className="block text-lg font-semibold mb-1">Delivery Time Span</label>
-                <input
-                  type="text"
-                  id="deliveryTimeSpan"
-                  name="deliveryTimeSpan"
-                  value={newProduct.deliveryTimeSpan}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="productSKU" className="block text-lg font-semibold mb-1">Product SKU</label>
-                <input
-                  type="text"
-                  id="productSKU"
-                  name="productSKU"
-                  value={newProduct.productSKU}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  required
-                />
-              </div>
-              <button type="submit" className="bg-green-500  text-white py-2 px-4 rounded">Save Order</button>
-            </form>
-          </div>
-        )}
+{activeSection === 'makeNewOrder' && (
+  <div>
+    <h2 className="text-3xl font-bold mb-6">Make New Order</h2>
+    <form onSubmit={handleNewOrderSubmit} className="space-y-4 bg-white p-6 rounded-lg shadow mb-10">
+      <div>
+        <label htmlFor="productName" className="block text-lg font-semibold mb-1">Product Name</label>
+        <input
+          type="text"
+          id="productName"
+          name="productName"
+          value={newProduct.productName}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="productImageUrl" className="block text-lg font-semibold mb-1">Image URL</label>
+        <input
+          type="text"
+          id="productImageUrl"
+          name="productImageUrl"
+          value={newProduct.productImageUrl}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="categoryId" className="block text-lg font-semibold mb-1">Category</label>
+        <select
+          id="categoryId"
+          name="categoryId"
+          value={newProduct.categoryId}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        >
+          <option value="">Select a category</option>
+          {categories.map((category) => (
+            <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="productDescription" className="block text-lg font-semibold mb-1">Description</label>
+        <textarea
+          id="productDescription"
+          name="productDescription"
+          value={newProduct.productDescription}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="productPrice" className="block text-lg font-semibold mb-1">Price</label>
+        <input
+          type="number"
+          id="productPrice"
+          name="productPrice"
+          value={newProduct.productPrice}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+          min="0"
+        />
+      </div>
+      <div>
+        <label htmlFor="createdDate" className="block text-lg font-semibold mb-1">Created Date</label>
+        <input
+          type="date"
+          id="createdDate"
+          name="createdDate"
+          value={newProduct.createdDate}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="deliveryTimeSpan" className="block text-lg font-semibold mb-1">Delivery Time Span</label>
+        <input
+          type="text"
+          id="deliveryTimeSpan"
+          name="deliveryTimeSpan"
+          value={newProduct.deliveryTimeSpan}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="productSKU" className="block text-lg font-semibold mb-1">Product SKU</label>
+        <input
+          type="text"
+          id="productSKU"
+          name="productSKU"
+          value={newProduct.productSKU}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      {/* New Inputs for Artwork Details */}
+      <div>
+        <label htmlFor="material" className="block text-lg font-semibold mb-1">Material Used</label>
+        <input
+          type="text"
+          id="material"
+          name="material"
+          placeholder='E.g Canvas, Acrylic Paint etc...'
+          value={newProduct.material}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="dateCreated" className="block text-lg font-semibold mb-1">Date Created</label>
+        <input
+          type="text"
+          id="dateCreated"
+          name="dateCreated"
+          placeholder='MM/DD/YYYY'
+          value={newProduct.dateCreated}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="mountingSteps" className="block text-lg font-semibold mb-1">Mounting Steps</label>
+        <textarea
+          id="mountingSteps"
+          name="mountingSteps"
+          value={newProduct.mountingSteps}
+          placeholder='E.g Say use screws and anchors for wall mounting etc...'
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="recommendedPlacement" className="block text-lg font-semibold mb-1">Recommended Placement</label>
+        <textarea
+          id="recommendedPlacement"
+          name="recommendedPlacement"
+          value={newProduct.recommendedPlacement}
+          placeholder='E.g Living room, Bedroom, Office etc'
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="recommendations" className="block text-lg font-semibold mb-1">Recommendations</label>
+        <textarea
+          id="recommendations"
+          name="recommendations"
+          placeholder='E.g Ideal for enhancing the aesthetics of living rooms, bedrooms, or even office spaces etc..'
+          value={newProduct.recommendations}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+      </div>
+      <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded">Save Order</button>
+    </form>
+  </div>
+)}
+
       </main>
     </div>
   );

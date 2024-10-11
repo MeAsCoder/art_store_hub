@@ -207,7 +207,7 @@ const newProducts = products.filter(product => product.createdDate === today);
   <div className="w-3/4 bg-white ml-5 ">
     {/* Headings */}
     <div className="flex text-center">
-  <Link href="/" className="text-l mr-20 font-bold hover:text-rose-500">
+  <Link href="/" className="text-l text-black mr-20 font-bold hover:text-rose-500">
     <h2>What&apos;s New</h2>
   </Link>
   <Link href="/" className="text-l text-black font-bold hover:text-rose-500">
