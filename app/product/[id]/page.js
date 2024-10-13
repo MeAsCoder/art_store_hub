@@ -143,10 +143,10 @@ const productChunks = chunkArray(mostPurchasedProducts, 4); // 4 products per sl
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div> 
+    <div className='m-4'> 
     <Breadcrumb productName={product?.name} />
   
-    <div className="container mx-auto mt-6 flex space-x-8">
+    <div className="container mx-auto mt-6 flex space-x-8" >
       {/* Left Section: Image and Product Info */}
       <div className="w-2/3">
         <div className="relative group overflow-hidden rounded-lg shadow-lg">
@@ -157,11 +157,12 @@ const productChunks = chunkArray(mostPurchasedProducts, 4); // 4 products per sl
             className="w-full h-80 object-cover transition-transform duration-300 transform group-hover:scale-110"
           />
           
-          <div className="relative mt-4">
+          <div className="relative mt-4 flex justify-center ">
             <div className="p-4 bg-white rounded-lg shadow-lg">
               <Link href={`/product/${product.id}`}>
-                <h3 className="text-rose-400 text-lg font-bold cursor-pointer hover:underline">{product.name}</h3>
-                <p className="text-rose-400">${product.price.toFixed(2)}</p>
+                <h3 className="text-black text-lg cursor-pointer hover:text-rose-300">{product.name}</h3>
+                <p className="text-black font-bold mt-3">${product.price.toFixed(2)}</p>
+                <p className="text-black mt-3 font-bold">Delivery: In {product.deliveryTimeSpan}</p>
               </Link>
               <div className="flex items-center mt-2">
                 <input
@@ -173,7 +174,7 @@ const productChunks = chunkArray(mostPurchasedProducts, 4); // 4 products per sl
                 />
                 <button
                   onClick={handleAddToCart}
-                  className="ml-2 bg-rose-400 text-white px-3 py-1 rounded hover:bg-rose-200 transition-colors"
+                  className="ml-2 text-sm bg-rose-400 text-white px-3 py-1 rounded hover:bg-rose-200 transition-colors"
                 >
                   Add to Cart
                 </button>
@@ -228,10 +229,10 @@ const productChunks = chunkArray(mostPurchasedProducts, 4); // 4 products per sl
                       />
                     </div>
                     <Link  href="/" > 
-                    <h3 className="text-lg font-semibold text-gray-800 mb-2">{product.productName}</h3>
+                    <h3 className="text-sm font-semibold text-gray-800 mb-2">{product.productName}</h3>
                     </Link>
                    
-                    <p className="text-rose-400">${product.price.toFixed(2)}</p>
+                    <p className="text-black font-bold">${product.price.toFixed(2)}</p>
                   </div>
                 ))}
               </div>

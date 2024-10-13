@@ -366,25 +366,25 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex">
-      <div className="w-1/4 bg-gray-900 text-white h-screen p-4">
-        <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
+      <div className="w-1/4 bg-gray-800 text-white h-screen p-4">
+        <h2 className="text-xl font-bold mb-4">Admin Dashboard</h2>
         <ul>
-          <li className={`mb-2 cursor-pointer ${activeSection === 'dashboard' ? 'text-blue-300' : ''}`} onClick={() => handleSectionChange('dashboard')}>
+          <li className={`mb-2 cursor-pointer hover:text-rose-200 ${activeSection === 'dashboard' ? 'text-blue-300' : ''}`} onClick={() => handleSectionChange('dashboard')}>
             <FontAwesomeIcon icon={faChartLine} className="mr-2" /> Dashboard
           </li>
-          <li className={`mb-2 cursor-pointer ${activeSection === 'products' ? 'text-blue-300' : ''}`} onClick={() => handleSectionChange('products')}>
+          <li className={`mb-2 cursor-pointer hover:text-rose-200 ${activeSection === 'products' ? 'text-blue-300' : ''}`} onClick={() => handleSectionChange('products')}>
             <FontAwesomeIcon icon={faBoxOpen} className="mr-2" /> Products
           </li>
-          <li className={`mb-2 cursor-pointer ${activeSection === 'orders' ? 'text-blue-300' : ''}`} onClick={() => handleSectionChange('orders')}>
+          <li className={`mb-2 cursor-pointer hover:text-rose-200 ${activeSection === 'orders' ? 'text-blue-300' : ''}`} onClick={() => handleSectionChange('orders')}>
             <FontAwesomeIcon icon={faTruck} className="mr-2" /> Orders
           </li>
-          <li className={`mb-2 cursor-pointer ${activeSection === 'users' ? 'text-blue-300' : ''}`} onClick={() => handleSectionChange('users')}>
+          <li className={`mb-2 cursor-pointer hover:text-rose-200 ${activeSection === 'users' ? 'text-blue-300' : ''}`} onClick={() => handleSectionChange('users')}>
             <FontAwesomeIcon icon={faUsers} className="mr-2" /> Users
           </li>
-          <li className={`mb-2 cursor-pointer ${activeSection === 'payments' ? 'text-blue-300' : ''}`} onClick={() => handleSectionChange('payments')}>
+          <li className={`mb-2 cursor-pointer hover:text-rose-200 ${activeSection === 'payments' ? 'text-blue-300' : ''}`} onClick={() => handleSectionChange('payments')}>
             <FontAwesomeIcon icon={faDollarSign} className="mr-2" /> Payments
           </li>
-          <li className={`mb-2 cursor-pointer ${activeSection === 'profile' ? 'text-blue-300' : ''}`} onClick={() => handleSectionChange('profile')}>
+          <li className={`mb-2 cursor-pointer hover:text-rose-200 ${activeSection === 'profile' ? 'text-blue-300' : ''}`} onClick={() => handleSectionChange('profile')}>
             <FontAwesomeIcon icon={faUser} className="mr-2" /> Profile
           </li>
         </ul>
@@ -465,7 +465,7 @@ const AdminDashboard = () => {
 
         {activeSection === 'products' && (
           <div>
-            <h2 className="text-3xl font-bold mb-6">Manage Products</h2>
+            <h2 className="text-xl font-bold mb-6">Manage Products</h2>
             <form onSubmit={handleNewOrderSubmit} className="mb-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input type="text" name="productName" value={newProduct.productName} onChange={handleInputChange} placeholder="Product Name" className="border border-gray-300 p-2 rounded" required />
@@ -483,7 +483,7 @@ const AdminDashboard = () => {
                 <FontAwesomeIcon icon={faPlus} className="mr-1" /> Add Product
               </button>
             </form>
-            <h3 className="text-2xl mb-4">Existing Products</h3>
+            <h3 className="text-xl mb-4">Existing Products</h3>
             <table className="min-w-full bg-white rounded-lg shadow-lg">
               <thead className="bg-gray-800 text-white">
                 <tr>

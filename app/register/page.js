@@ -1,270 +1,164 @@
-// pages/register.js
 "use client"
-import { useState } from 'react'; // Import useState
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { toast,ToastContainer  } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhoneAlt, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
-  // State to store form values and errors
+  const [userType, setUserType] = useState("client"); // State to determine user type
+  const [registerMethod, setRegisterMethod] = useState("phone"); // State to toggle between phone and email registration
   const [formData, setFormData] = useState({
-   
-    userName: '',
-    passWord: '',
-    email: '',
-    country: '',
-    firstName: '',
-    newsletter: false,
+    phoneOrEmail: "",
+    otp: "",
+    agreeToPolicy: false,
   });
 
-
-
-  const [errors, setErrors] = useState({});
-  const [toastMessage, setToastMessage] = useState('');
-
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
-  const validateForm = () => {
-    const newErrors = {};
-    Object.keys(formData).forEach((key) => {
-      if (!formData[key]) {
-        newErrors[key] = `${key.replace(/([A-Z])/g, ' $1')} is required`;
-      }
-    });
-    return newErrors;
+  const handleRegisterMethodChange = (method) => {
+    setRegisterMethod(method);
+    setFormData({ ...formData, phoneOrEmail: "", otp: "" }); // Reset fields
   };
 
-  /*
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validationErrors = validateForm();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-    } else {
-      setErrors({});
-      // Handle form submission logic here
-      console.log("Form submitted", formData);
+    if (!formData.agreeToPolicy) {
+      toast.error("Please agree to the policy");
+      return;
     }
+
+    // Handle form submission logic
+    console.log("Form submitted", formData);
+    toast.success("Form submitted successfully!");
   };
 
-*/
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const validationErrors = validateForm();
-  if (Object.keys(validationErrors).length > 0) {
-    setErrors(validationErrors); // Set form validation errors
-  } else {
-    setErrors({}); // Clear errors if validation passes
-
-    try {
-      const response = await fetch("https://localhost:9937/api/user/register", {
-        method: "POST", // HTTP method
-        headers: {
-          "Content-Type": "application/json", // Specify the request is JSON
-        },
-        body: JSON.stringify(formData), // Send form data as JSON
-      });
-
-
-      const data = await response.json(); 
-
-
-      if (!response.ok) {
-        // If the username is taken, show the error from the response
-        if (response.status == 409) {
-          toast.error(data.error || "UserName already taken", {
-            position: "top-right",
-          });
-        } else {
-          toast.error(data.error || "An error occurred during registration",{
-            position : "top-right",
-
-          });
-        
-      }
-    }
-
-      else {
-        console.log("Form submitted successfully", data);
-        toast.success("Registered successfully!", {
-          position: "top-right", // Use string instead of accessing POSITION
-        });
-  
-        setFormData({
-          userName: '',
-          passWord: '',
-          email: '',
-          country: '',
-          firstName: '',
-          newsletter: false,
-        });
-      }
-    
-
-      // Optionally handle successful registration here (e.g., redirect, display message)
-    } catch (error) {
-      console.error("Error submitting the form:", error);
-      // Optionally set an error state to display in the UI
-      toast.error("Registration failed. Please try again.", {
-        position: 'top-right',
-      });
-    }
-  }
-};
-
-
-
   return (
-    <div>
-     
-
-      <div className="container mx-auto mt-12 px-4 flex justify-center">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="w-full max-w-md bg-white p-8 shadow-lg rounded-lg">
         <div className="w-full max-w-md">
-          <h1 className="text-4xl font-bold text-center mb-8 text-red-500 ">Register</h1>
+          <h1 className="text-lg font-bold text-center mb-8 text-red-500">Login with verification code</h1>
 
-          <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-            {/* First Name */}
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
-                Name
-              </label>
-              <input
-                className={`input input-bordered w-full ${errors.firstName ? 'border-red-500' : ''}`}
-                id="firstName"
-                name="firstName"
-                type="text"
-                placeholder="Your First Name"
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-              {errors.firstName && <p className="text-red-500 text-xs italic">{errors.firstName}</p>}
-            </div>
-
-            {/* UserName */}
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="userName">
-                UserName
-              </label>
-              <input
-                className={`input input-bordered w-full ${errors.userName ? 'border-red-500' : ''}`}
-                id="userName"
-                name="userName"
-                type="text"
-                placeholder="Your User Name"
-                value={formData.userName}
-                onChange={handleChange}
-              />
-              {errors.userName && <p className="text-red-500 text-xs italic">{errors.userName}</p>}
-            </div>
-
-           
-                     
-
-            {/* Email */}
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                Email
-              </label>
-              <input
-                className={`input input-bordered w-full ${errors.email ? 'border-red-500' : ''}`}
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Your Email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-              {errors.email && <p className="text-red-500 text-xs italic">{errors.email}</p>}
-            </div>
-            {/*Password field*/}
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="passWord">
-                Password
-              </label>
-              <input
-                className={`input input-bordered w-full ${errors.passWord ? 'border-red-500' : ''}`}
-                id="passWord"
-                name="passWord"
-                type="passWord"
-                placeholder="Your Password"
-                value={formData.passWord}
-                onChange={handleChange}
-              />
-              {errors.passWord && <p className="text-red-500 text-xs italic">{errors.passWord}</p>}
-            </div>
-
-            {/* Country of Residence */}
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="country">
-                Country of Residence
-              </label>
-              <select
-                className={`select select-bordered w-full ${errors.country ? 'border-red-500' : ''}`}
-                id="country"
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-              >
-                <option value="">Select Country</option>
-                <option value="USA">United States</option>
-                <option value="UK">United Kingdom</option>
-                <option value="Australia">Australia</option>
-                <option value="Canada">Canada</option>
-                {/* Add more countries as needed */}
-              </select>
-              {errors.country && <p className="text-red-500 text-xs italic">{errors.country}</p>}
-            </div>
-
-          
-
-            {/* Newsletter Subscription */}
-            <div className="mb-4 flex items-center">
-              <input
-                type="checkbox"
-                id="newsletter"
-                name="newsletter"
-                className="mr-2"
-                checked={formData.newsletter}
-                onChange={handleChange}
-              />
-              <label htmlFor="newsletter" className="text-gray-700 text-sm">
-                I would like to receive email communication and newsletters
-              </label>
-            </div>
-
-            {/* Terms and Conditions */}
-            <div className="mb-4 flex items-center">
-              <input type="checkbox" id="terms" className="mr-2" />
-              <label htmlFor="terms" className="text-gray-700 text-sm">
-                I agree to the terms and conditions
-              </label>
-            </div>
-
-            {/* Submit Button */}
-            <div className="flex items-center justify-between">
+          {/* User Type Selection */}
+          <div className="mb-6">
+            <p className="text-center text-sm font-semibold">Join as a Buyer or a Seller Artist?</p>
+            <div className="flex justify-center gap-4">
               <button
-                type="submit"
-                className=" w-full bg-red-500 hover:bg-rose-400 text-white font-bold py-2 px-4 rounded"
+                type="button"
+                className={`${
+                  userType === "client" ? "bg-red-500" : "bg-gray-300"
+                } text-white font-semibold py-2 px-4 rounded`}
+                onClick={() => setUserType("client")}
               >
-                Register
+                I&apos;m a Buyer, looking for an Art
+              </button>
+              <button
+                type="button"
+                className={`${
+                  userType === "artist" ? "bg-red-500" : "bg-gray-300"
+                } text-white font-semibold py-2 px-4 rounded`}
+                onClick={() => setUserType("artist")}
+              >
+                I&apos;m an Artist, looking for Buyers
               </button>
             </div>
-          </form>
-          <p className="text-center text-gray-600">
-             Have an account?{' '}
-            <a href="/login" className="text-rose-400 hover:underline">
-              Login here
-            </a>
-          </p>
+          </div>
         </div>
+
+        {/* Toggle between Phone and Email Registration with Icons */}
+                  <div className="flex justify-between mb-4">
+            <button
+              className={`flex items-center px-4 py-2 mr-2 rounded ${registerMethod === "phone" ? "text-red-500 underline" : "text-gray-500"}`}
+              onClick={() => handleRegisterMethodChange("phone")}
+            >
+              <FontAwesomeIcon icon={faPhoneAlt} className="mr-2" />
+              Phone
+            </button>
+            <button
+              className={`flex items-center px-4 py-2 rounded ${registerMethod === "email" ? "text-red-500 underline" : "text-gray-500"}`}
+              onClick={() => handleRegisterMethodChange("email")}
+            >
+              <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
+              Email
+            </button>
+          </div>
+
+
+        {/* Input for Phone or Email */}
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4 flex items-center">
+            <input
+              type={registerMethod === "phone" ? "tel" : "email"}
+              name="phoneOrEmail"
+              placeholder={registerMethod === "phone" ? "+254 Phone Number" : "Email Address"}
+              value={formData.phoneOrEmail}
+              onChange={handleInputChange}
+              className="flex-grow p-2 border rounded focus:outline-none focus:ring-2 focus:ring-red-400"
+              required
+            />
+            <button className="ml-2 text-sm bg-red-500 text-white px-4 py-2 rounded">Send</button>
+          </div>
+
+          {/* OTP Input */}
+          <div className="mb-4">
+            <label className="block text-gray-700 mb-2">Please input OTP code</label>
+            <input
+              type="text"
+              name="otp"
+              placeholder="OTP Code"
+              value={formData.otp}
+              onChange={handleInputChange}
+              className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-red-400"
+              required
+            />
+          </div>
+
+          {/* Policy Checkbox */}
+          <div className="mb-4 flex items-center">
+            <input
+              type="checkbox"
+              name="agreeToPolicy"
+              checked={formData.agreeToPolicy}
+              onChange={handleInputChange}
+              className="mr-2"
+            />
+            <label className="text-gray-700">
+              I agree to the <a href="#" className="text-red-500 hover:underline">terms and conditions</a>.
+            </label>
+          </div>
+
+          {/* Submit Button */}
+          <div className="flex items-center justify-between">
+            <button
+              type="submit"
+              className="w-full bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+
+        {/* Login Options */}
+        <div className="mt-6 text-center">
+          <p className="text-gray-600">Or</p>
+          <a href="/login" className="text-red-500 hover:underline mb-2">Login with Password</a>
+          <div className="mt-4">
+            <button className="w-full bg-blue-500 text-white py-2 px-4 rounded mb-2">
+              Login Via Google
+            </button>
+            <button className="w-full bg-blue-800 text-white py-2 px-4 rounded">
+              Login Via Facebook
+            </button>
+          </div>
+        </div>
+
+        <ToastContainer />
       </div>
     </div>
   );

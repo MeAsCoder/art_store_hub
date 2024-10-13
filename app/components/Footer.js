@@ -11,7 +11,10 @@ const Footer = () => {
             <h3 className="text-lg font-bold mb-4">Company</h3>
             <ul className="list-none space-y-2">
               <li className="hover:translate-x-1 transition-transform">
-                <a href="#">About us</a>
+                <a href="/about">About us</a>
+              </li>
+              <li className="hover:translate-x-1 transition-transform">
+                <a href="/contacts">Contact Us</a>
               </li>
               <li className="hover:translate-x-1 transition-transform">
                 <a href="#">Our services</a>
@@ -19,9 +22,7 @@ const Footer = () => {
               <li className="hover:translate-x-1 transition-transform">
                 <a href="#">Privacy policy</a>
               </li>
-              <li className="hover:translate-x-1 transition-transform">
-                <a href="#">Visit website</a>
-              </li>
+             
             </ul>
           </div>
           {/* Our Services */}

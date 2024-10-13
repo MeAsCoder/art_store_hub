@@ -147,94 +147,99 @@ const newProducts = products.filter(product => product.createdDate === today);
      <div className="mt-10"></div>     
 
       
-      <div className="flex h-screen">
+      <div className="flex">
+
+
+
+        <div></div>
  
 
-  {/* Left Sidebar */}
-  <div className="w-1/4 bg-slate-600 text-white p-4" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
-        <div className="flex items-center mb-4 sticky top-0 bg-rose-300">
-          <FaListUl className="mr-2" />
-          <h2 className="text-xl font-bold">Category</h2>
-        </div>
-        <nav>
-          <ul className="text-sm z-100">
-            {categories.length > 0 ? (
-              categories.map((category) => (
-                <li
-                  key={category.categoryId}
-                  className="relative mb-2"
-                  onMouseEnter={() => handleMouseEnter(category)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <a href={`/product_category/${category.categoryId}?name=${encodeURIComponent(category.categoryName)}`} className="block py-2 hover:bg-slate-500 flex items-center">
-                    <FaListUl className="mr-2" />
-                    {category.categoryName}
-                    <FaChevronRight className="ml-auto" />
-                  </a>
+        {/* Left Sidebar */}
+        <div className="w-1/4 bg-slate-600 text-white p-4" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
+              <div className="flex items-center mb-4 sticky top-0 bg-rose-300">
+                <FaListUl className="mr-2" />
+                <h2 className="text-xl font-bold">Category</h2>
+              </div>
+              <nav>
+                <ul className="text-sm z-100">
+                  {categories.length > 0 ? (
+                    categories.map((category) => (
+                      <li
+                        key={category.categoryId}
+                        className="relative mb-2"
+                        onMouseEnter={() => handleMouseEnter(category)}
+                        onMouseLeave={handleMouseLeave}
+                      >
+                        <a href={`/product_category/${category.categoryId}?name=${encodeURIComponent(category.categoryName)}`} className="block py-2 hover:bg-slate-500 flex items-center">
+                          <FaListUl className="mr-2" />
+                          {category.categoryName}
+                          <FaChevronRight className="ml-auto" />
+                        </a>
 
-                  {/* Submenu Panel for Products */}
-                  {hoveredCategory === category.categoryId && products.length > 0 && (
-                    <div
-                    className="absolute top-0 left-full w-64 bg-slate-700 text-white p-4 shadow-lg z-50"
-                    style={{ minHeight: '200px', transform: 'translateY(-100%)', right: '-10px' }} 
-                    >
-                      <h3 className="text-lg mb-2">Products</h3>
-                      <ul>
-                        {hoveredproducts.map((product) => (
-                          <li key={product.id} className="flex items-center mb-2">
-                            <img
-                              src={product.productImageUrl}
-                              alt={product.productName}
-                              className="w-12 h-12 object-cover mr-2"
-                            />
-                            <span>{product.productName}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                        {/* Submenu Panel for Products */}
+                        {hoveredCategory === category.categoryId && products.length > 0 && (
+                          <div
+                          className="absolute top-0 left-full w-64 bg-slate-700 text-white p-4 shadow-lg z-50"
+                          style={{ minHeight: '200px', transform: 'translateY(-100%)', right: '-10px' }} 
+                          >
+                            <h3 className="text-lg mb-2">Products</h3>
+                            <ul>
+                              {hoveredproducts.map((product) => (
+                                <li key={product.id} className="flex items-center mb-2">
+                                  <img
+                                    src={product.productImageUrl}
+                                    alt={product.productName}
+                                    className="w-12 h-12 object-cover mr-2"
+                                  />
+                                  <span>{product.productName}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </li>
+                    ))
+                  ) : (
+                    <li>Loading categories...</li>
                   )}
-                </li>
-              ))
-            ) : (
-              <li>Loading categories...</li>
-            )}
-          </ul>
-        </nav>
-      </div>
+                </ul>
+              </nav>
+            </div>
 
 
-  {/* Right Content with Carousel */}
-  <div className="w-3/4 bg-white ml-5 ">
-    {/* Headings */}
-    <div className="flex text-center">
-  <Link href="/" className="text-l text-black mr-20 font-bold hover:text-rose-500">
-    <h2>What&apos;s New</h2>
-  </Link>
-  <Link href="/" className="text-l text-black font-bold hover:text-rose-500">
-    <h3>Flash Sale</h3>
-  </Link>
-</div>
+          {/* Right Content with Carousel */}
+          <div className="w-3/4 bg-white ml-5 ">
+          
 
-    {/* Carousel */}
-    <div className="z-0">
-      <Carousel>
-        {products.map((product) => (
-          <Carousel.Item key={product.id}>
-            <img
-              src={product.productImageUrl} 
-              alt={product.productName} 
-              style={{ width: "100%", height: "400px", objectFit: "cover" }} 
-            />
-            <Carousel.Caption>
-              <h3>{product.productName}</h3>
-            </Carousel.Caption>
-          </Carousel.Item>
-        ))}
-      </Carousel>
-    </div>
-   
+            {/* Carousel */}
+            <div className="z-0">
+            <div className="flex items-center mb-4">
+              <Link href="#">
+              <h1 className=" text-black mr-5  font-bold hover:text-rose-500"> What&apos;s New</h1>
+              </Link>
+              <Link href="#">
+              <h1 className=" text-black font-bold hover:text-rose-500">Flash Sale </h1>
 
-   
+              </Link>
+  
+              </div>
+              <Carousel>
+                {products.map((product) => (
+                  <Carousel.Item key={product.id}>
+                    <img
+                      src={product.productImageUrl} 
+                      alt={product.productName} 
+                      className="w-full h-48 object-contain" 
+                     
+                    />
+                    <Carousel.Caption className = "p-0">
+                      <h3>{product.productName}</h3>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                ))}
+              </Carousel>
+            </div>
+  
   </div>
 </div>
 

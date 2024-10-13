@@ -70,7 +70,7 @@ const Contact = () => {
             <p className="mb-4">
               Phone: <a href="tel:+1234567890" className="text-blue-600">+1 234 567 890</a>
             </p>
-            <p className="mb-4">Address: 456 Art Avenue, City, State, ZIP</p>
+            <p className="mb-4">Address: 456 Avenue, Nairobi, 20300</p>
             <p className="mb-4">Visit us for gallery exhibitions, workshops, and more!</p>
             <p className="mb-4">Follow us on social media to stay updated with our latest collections:</p>
             <div className="flex space-x-4 mt-2">

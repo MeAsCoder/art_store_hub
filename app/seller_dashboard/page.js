@@ -121,39 +121,39 @@ const SellerDashboard = () => {
     <div className="flex h-screen">
       {/* Sidebar */}
       <aside className="w-1/4 bg-gray-800 text-white p-6">
-        <h2 className="text-2xl font-bold mb-8">Seller Dashboard</h2>
+        <h2 className="text-xl font-bold mb-8">Seller Dashboard</h2>
         <nav>
           <ul>
             <li
-              className={`mb-4 cursor-pointer ${activeSection === 'dashboard' ? 'text-yellow-300' : ''}`}
+              className={`mb-4 cursor-pointer hover:text-rose-200 ${activeSection === 'dashboard' ? 'text-yellow-300' : ''}`}
               onClick={() => setActiveSection('dashboard')}
             >
                 <FontAwesomeIcon icon={faHome} className="mr-2" />
               Dashboard
             </li>
             <li
-              className={`mb-4 cursor-pointer ${activeSection === 'pendingOrders' ? 'text-yellow-300' : ''}`}
+              className={`mb-4 cursor-pointer hover:text-rose-200 ${activeSection === 'pendingOrders' ? 'text-yellow-300' : ''}`}
               onClick={() => setActiveSection('pendingOrders')}
             >
                 <FontAwesomeIcon icon={faShoppingCart} className="mr-2" />
               Pending Orders
             </li>
             <li
-              className={`mb-4 cursor-pointer ${activeSection === 'deliveredOrders' ? 'text-yellow-300' : ''}`}
+              className={`mb-4 cursor-pointer hover:text-rose-200 ${activeSection === 'deliveredOrders' ? 'text-yellow-300' : ''}`}
               onClick={() => setActiveSection('deliveredOrders')}
             >
                  <FontAwesomeIcon icon={faTruck} className="mr-2" />
               Delivered Orders
             </li>
             <li
-              className={`mb-4 cursor-pointer ${activeSection === 'returnedOrders' ? 'text-yellow-300' : ''}`}
+              className={`mb-4 cursor-pointer hover:text-rose-200 ${activeSection === 'returnedOrders' ? 'text-yellow-300' : ''}`}
               onClick={() => setActiveSection('returnedOrders')}
             >
                  <FontAwesomeIcon icon={faUndo} className="mr-2" />
               Orders Returned
             </li>
             <li
-              className={`mb-4 cursor-pointer ${activeSection === 'makeNewOrder' ? 'text-yellow-300' : ''}`}
+              className={`mb-4 cursor-pointer hover:text-rose-200 ${activeSection === 'makeNewOrder' ? 'text-yellow-300' : ''}`}
               onClick={() => setActiveSection('makeNewOrder')}
             >
                 <FontAwesomeIcon icon={faPlusCircle} className="mr-2" />
@@ -161,7 +161,7 @@ const SellerDashboard = () => {
             </li>
 
             <li
-              className={`mb-4 cursor-pointer ${
+              className={`mb-4 cursor-pointer hover:text-rose-200 ${
                 activeSection === "profile" ? "text-yellow-300" : ""
               }`}
               onClick={() => setActiveSection("profile")}
@@ -178,7 +178,7 @@ const SellerDashboard = () => {
       <main className="flex-1 bg-gray-100 p-8 overflow-y-auto">
         {activeSection === 'dashboard' && (
           <div>
-            <h2 className="text-3xl font-bold mb-6">Dashboard Overview</h2>
+            <h2 className="text-xl font-bold mb-6">Dashboard Overview</h2>
             <div className="grid grid-cols-3 gap-6 mb-8">
               <div className="bg-white p-6 shadow rounded-lg">
                 <h3 className="text-xl font-bold">Total Sales</h3>

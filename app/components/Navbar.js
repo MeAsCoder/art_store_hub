@@ -140,9 +140,7 @@ const Navbar = () => {
                   }`}> 
           <ul className="h-screen md:h-auto items-center justify-center md:flex "> 
             
-            <li className="pb-4 text-xs text-white py-2 md:px-2 text-center border-b-2 md:border-b-0  hover:bg-purple-900  border-purple-900  md:hover:text-purple-600 md:hover:bg-transparent"><Link href="/contacts" 
-             >CONTACT US</Link></li> 
-            <li className="pb-4 text-xs text-white py-2 md:px-4 text-center border-b-2 md:border-b-0  hover:bg-purple-900  border-purple-900  md:hover:text-purple-600 md:hover:bg-transparent"><Link href="/about">ABOUT US</Link></li> 
+           
             <li className="pb-4 text-xs text-white py-2 md:px-4 text-center border-b-2 md:border-b-0  hover:bg-purple-900  border-purple-900  md:hover:text-purple-600 md:hover:bg-transparent"><Link href="/categories_shop">SHOP BY CATEGORY</Link></li> 
             <li className="pb-4 text-xs text-white py-2 md:px-4 text-center border-b-2 md:border-b-0  hover:bg-purple-900  border-purple-900  md:hover:text-purple-600 md:hover:bg-transparent"> 
               {isMounted && ( 
@@ -153,14 +151,20 @@ const Navbar = () => {
                   onMouseLeave={() => setIsCartHovered(false)} 
                 > 
                   <FontAwesomeIcon icon={faCartPlus} className="text-white" /> 
-                  {typeof window !== 'undefined' && cartCount > 0 && ( 
+                  {typeof window !== 'undefined' && cartCount > 0 ? ( 
                     <span className="ml-1 text-white text-sm bg-gray-700 rounded-full w-4 h-4 flex items-center justify-center"> 
                       {cartCount} 
                     </span> 
-                  )} 
+                  ):
+                  isCartHovered &&  (
+                    <span className="absolute bg-white text-black p-2 rounded shadow-lg text-xs mt-8">
+                      Cart is empty
+                    </span>
+                  )                
+                  } 
                 </Link> 
               )} 
-                            {isCartHovered && cart.length > 0 && ( 
+                      {isCartHovered && cart.length > 0 && ( 
                   <div className="absolute bg-white text-black shadow-lg rounded p-4 mt-12 z-50 mr-10 w-96 max-w-xl"> 
                     <h3 className="font-semibold text-lg mb-4">Cart Items</h3> 
                     <ul> 
@@ -188,6 +192,7 @@ const Navbar = () => {
                   </div> 
                 )}
 
+
             </li> 
             <li className="pb-4 text-xs text-white py-2 md:px-2 text-center border-b-2 md:border-b-0  hover:bg-purple-900  border-purple-900  md:hover:text-purple-600 md:hover:bg-transparent"> 
               <button 
@@ -210,7 +215,7 @@ const Navbar = () => {
                 href="/register" 
                 className="inline-block px-4 py-1 text-white bg-rose-400 rounded hover:bg-rose-300 transition duration-200 ml-2" 
               > 
-                REGISTER 
+                SIGN UP 
               </Link> 
             </li> 
           </ul> 
