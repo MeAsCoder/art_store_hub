@@ -49,7 +49,7 @@ const CheckoutPage = ({ amount }) => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `http://www.localhost:3000/payment-success?amount=${amount}`,
+        return_url: `https://art-store-hub-nnad.vercel.app/payment-success?amount=${amount}`,
       },
     });
 
@@ -83,17 +83,20 @@ const CheckoutPage = ({ amount }) => {
 
   return (
     <form onSubmit={handleSubmit} className="bg-white p-2 rounded-md">
-      {clientSecret && <PaymentElement />}
-
-      {errorMessage && <div>{errorMessage}</div>}
-
-      <button
-        disabled={!stripe || loading}
-        className="text-white w-full p-5 bg-black mt-2 rounded-md font-bold disabled:opacity-50 disabled:animate-pulse"
-      >
-        {!loading ? `Pay $${amount}` : "Processing..."}
-      </button>
-    </form>
+    {clientSecret && <PaymentElement />}
+  
+    {errorMessage && <div>{errorMessage}</div>}
+  
+    <button
+      disabled={!stripe || loading}
+      className={`text-white w-full p-5 mt-2 rounded-md font-bold disabled:opacity-50 disabled:animate-pulse ${
+        loading ? "bg-blue-600" : "bg-black"
+      }`}
+    >
+      {!loading ? `Pay $${amount}` : "Processing..."}
+    </button>
+  </form>
+  
   );
 };
 
