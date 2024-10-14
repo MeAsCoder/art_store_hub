@@ -13,7 +13,7 @@ import BestSellers from "./components/BestSellers";
 import ArtistSpotlight from "./components/ArtistSportlight";
 import Testimonials from "./components/Testimonials";
 import BlogSection from "./components/BlogPost";
-import NewsletterSignUp from "./components/NewsLetterSignUp";
+import NewsletterSignUp from "./components/NewsLetterSignUp";   
 import WhyChooseUs from "./components/WhyChooseUs";
 
 
