@@ -6,11 +6,11 @@ import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 's
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import Navbar from '@/app/components/Navbar';
-import Breadcrumb from '@/app/components/Breadcrumb';
+
+import Breadcrumb from '../components/Breadcrumb';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
-import Footer from '@/app/components/Footer';
+
 import Toast from '@/app/components/Toast';
 
 import { useCart } from '@/app/context/CartContext';
