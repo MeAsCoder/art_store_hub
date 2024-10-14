@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-import { useCart } from '@/app/context/CartContext';
+import { useCart } from '../../context/CartContext';
 
 
 

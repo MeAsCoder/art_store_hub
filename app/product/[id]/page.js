@@ -7,13 +7,13 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 
-import Breadcrumb from '../components/Breadcrumb';
+import Breadcrumb from '../../components/Breadcrumb';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 
-import Toast from '@/app/components/Toast';
+import Toast from '../../components/Toast';
 
-import { useCart } from '@/app/context/CartContext';
+import { useCart } from '../../context/CartContext';
 
 
 //import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
