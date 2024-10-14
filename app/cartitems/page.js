@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-import { useCart } from '@/app/context/CartContext';
+import { useCart } from '../context/CartContext';
 import { CheckIcon } from '@heroicons/react/24/solid'; // Import from the correct path for Heroicons v2
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRotateLeft, faTruck, faTags, faLeaf } from '@fortawesome/free-solid-svg-icons'; 
