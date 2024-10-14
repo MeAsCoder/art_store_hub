@@ -7,6 +7,7 @@ import {
   PaymentElement,
 } from "@stripe/react-stripe-js";
 import convertToSubcurrency from "../lib/convertToSubcurrency";
+import { useCart } from "../context/CartContext";
 
 const CheckoutPage = ({ amount }) => {
   const stripe = useStripe();
@@ -14,6 +15,7 @@ const CheckoutPage = ({ amount }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [loading, setLoading] = useState(false);
+  const { clearCart } = useCart(); // Get clearCart function
 
   useEffect(() => {
     fetch("/api/stripe", {
@@ -58,6 +60,7 @@ const CheckoutPage = ({ amount }) => {
     } else {
       // The payment UI automatically closes with a success animation.
       // Your customer is redirected to your `return_url`.
+      clearCart();
     }
 
     setLoading(false);

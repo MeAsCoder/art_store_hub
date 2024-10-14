@@ -84,6 +84,14 @@ export const CartProvider = ({ children }) => {
     toast.success(`Quantity updated!`);
   };
 
+  const clearCart = () => {
+    setCart([]); // Clear the cart
+    setCartCount(0); // Reset the cart count
+    updateLocalStorage([]); // Update localStorage
+    toast.success("Cart cleared successfully!"); // Optional: Notify user
+  };
+  
+
   // Load the cart from localStorage when the component mounts
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -96,7 +104,7 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity , cartCount, toastMessage }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity,clearCart,cartCount, toastMessage }}>
       {children}
       <ToastContainer /> {/* Toast Container for notifications */}
     </CartContext.Provider>
