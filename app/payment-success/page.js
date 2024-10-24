@@ -8,8 +8,8 @@ const PaymentSuccess = () => {
             <h1 className="text-3xl font-bold mb-6 text-green-500">Payment Successful!</h1>
             <p>Your payment has been processed successfully. Thank you for your purchase!</p>
             <p>If you have any questions, please contact our support team.</p>
-            <Link href="/" className="text-blue-500 hover:underline mt-4">
-                Return to Home
+            <Link href="/order-tracking" className="text-blue-500 font-bold hover:underline mt-4">
+                My Orders
             </Link>
         </div>
 

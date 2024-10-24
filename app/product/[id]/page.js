@@ -154,6 +154,8 @@ const productChunks = chunkArray(mostPurchasedProducts, 4); // 4 products per sl
           <img
             src={product?.productImageUrl}
             alt={product?.name}
+            width={500}
+            height={300}
             className="w-full h-80 object-cover transition-transform duration-300 transform group-hover:scale-110"
           />
           

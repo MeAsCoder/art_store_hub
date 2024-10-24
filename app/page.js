@@ -143,7 +143,7 @@ const newProducts = products.filter(product => product.createdDate === today);
 
 
   return (
-    <div>
+    <div className="m-4">
      <div className="mt-10"></div>     
 
       
@@ -156,10 +156,7 @@ const newProducts = products.filter(product => product.createdDate === today);
 
         {/* Left Sidebar */}
         <div className="w-1/4 bg-slate-600 text-white p-4" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
-              <div className="flex items-center mb-4 sticky top-0 bg-rose-300">
-                <FaListUl className="mr-2" />
-                <h2 className="text-xl font-bold">Category</h2>
-              </div>
+              
               <nav>
                 <ul className="text-sm z-100">
                   {categories.length > 0 ? (

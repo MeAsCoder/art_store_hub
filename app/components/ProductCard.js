@@ -9,6 +9,7 @@ import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
 import { faThumbsDown as faThumbsDownSolid } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsDown as faThumbsDownRegular } from '@fortawesome/free-regular-svg-icons';
+import Image from "next/image";
 
 const ProductCard = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -34,10 +35,13 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="relative group overflow-hidden rounded-lg shadow-lg w-full max-w-xs transition-transform duration-300 transform hover:scale-105 hover:translate-y-1">
-      <img
+      <Image
         src={product.productImageUrl}
         alt={product.name}
-        className="w-full h-48 object-cover transition-transform duration-300 transform group-hover:scale-110" // Zoom effect on image
+        layout="responsive" 
+        width={500}
+        height={300}
+        className="transition-transform duration-300 transform group-hover:scale-110" // Zoom effect on image
       />
       <div className="bg-white p-4">
         <Link href={`/product/${product.id}`}>

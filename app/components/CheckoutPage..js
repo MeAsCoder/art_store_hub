@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import {
   useStripe,
@@ -8,6 +6,7 @@ import {
 } from "@stripe/react-stripe-js";
 import convertToSubcurrency from "../lib/convertToSubcurrency";
 import { useCart } from "../context/CartContext";
+import PayPalButton from "./PayPalButton"; // Import the PayPalButton component
 
 const CheckoutPage = ({ amount }) => {
   const stripe = useStripe();
@@ -15,7 +14,7 @@ const CheckoutPage = ({ amount }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [loading, setLoading] = useState(false);
-  const { clearCart } = useCart(); // Get clearCart function
+  const { clearCart } = useCart();
 
   useEffect(() => {
     fetch("/api/stripe", {
@@ -23,6 +22,7 @@ const CheckoutPage = ({ amount }) => {
       headers: {
         "Content-Type": "application/json",
       },
+      // Pass the amount in cents to Stripe (converted)
       body: JSON.stringify({ amount: convertToSubcurrency(amount) }),
     })
       .then((res) => res.json())
@@ -49,17 +49,13 @@ const CheckoutPage = ({ amount }) => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `https://art-store-hub-nnad.vercel.app/payment-success?amount=${amount}`,
+        return_url: `http://localhost:3000/payment-success?amount=${amount}`,
       },
     });
 
     if (error) {
-      // This point is only reached if there's an immediate error when
-      // confirming the payment. Show the error to your customer (for example, payment details incomplete)
       setErrorMessage(error.message);
     } else {
-      // The payment UI automatically closes with a success animation.
-      // Your customer is redirected to your `return_url`.
       clearCart();
     }
 
@@ -83,20 +79,20 @@ const CheckoutPage = ({ amount }) => {
 
   return (
     <form onSubmit={handleSubmit} className="bg-white p-2 rounded-md">
-    {clientSecret && <PaymentElement />}
-  
-    {errorMessage && <div>{errorMessage}</div>}
-  
-    <button
-      disabled={!stripe || loading}
-      className={`text-white w-full p-5 mt-2 rounded-md font-bold disabled:opacity-50 disabled:animate-pulse ${
-        loading ? "bg-blue-600" : "bg-black"
-      }`}
-    >
-      {!loading ? `Pay $${amount}` : "Processing..."}
-    </button>
-  </form>
-  
+      {clientSecret && <PaymentElement />}
+      {errorMessage && <div>{errorMessage}</div>}
+      <button
+        disabled={!stripe || loading}
+        className={`text-white w-full p-5 mt-2 rounded-md font-bold disabled:opacity-50 disabled:animate-pulse ${
+          loading ? "bg-blue-600" : "bg-black"
+        }`}
+      >
+        {!loading ? `Pay $${amount}` : "Processing..."}
+      </button>
+      {/* Render the PayPalButton, passing amount in dollars */}
+      {console.log("Amount being passed to PayPalButton: ", amount)}
+      <PayPalButton amount={amount} />
+    </form>
   );
 };
 

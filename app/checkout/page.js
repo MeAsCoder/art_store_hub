@@ -58,10 +58,13 @@ export default function Home() {
         <h2 className="text-xl">
         is about to process your payment of
           <span className="font-bold"> ${amount}</span>
+          
         </h2>
       </div>
+      <div><p>Check Out Securely with Stripe or PayPal</p></div>
 
       <Elements
+        
         stripe={stripePromise}
         options={{
           mode: "payment",
