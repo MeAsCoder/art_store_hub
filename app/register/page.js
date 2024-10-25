@@ -46,7 +46,7 @@ const Register = () => {
       });
   
       // Check the response status
-      if (response.status === 201) {
+      if (response.status === 200) {
         // Successful registration
         const data = await response.json();
         toast.success("User registered successfully!");
