@@ -6,7 +6,8 @@ import {
 } from "@stripe/react-stripe-js";
 import convertToSubcurrency from "../lib/convertToSubcurrency";
 import { useCart } from "../context/CartContext";
-import PayPalButton from "./PayPalButton.js"; // Import the PayPalButton component
+//import PayPalButton from "./PayPalButton"; // Import the PayPalButton component
+import PayPalButton from "../paypal_button/PaypalButton"
 const CheckoutPage = ({ amount }) => {
   const stripe = useStripe();
   const elements = useElements();
