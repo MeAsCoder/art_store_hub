@@ -86,7 +86,7 @@ const Register = () => {
               } text-white font-semibold py-2 px-4 rounded`}
               onClick={() => setUserType("client")}
             >
-              I'm a Buyer, looking for an Art
+              I&apos;m a Buyer, looking for an Art
             </button>
             <button
               type="button"
@@ -95,7 +95,7 @@ const Register = () => {
               } text-white font-semibold py-2 px-4 rounded`}
               onClick={() => setUserType("artist")}
             >
-              I'm an Artist, looking for Buyers
+              I&apos;m an Artist, looking for Buyers
             </button>
           </div>
         </div>
