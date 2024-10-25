@@ -49,6 +49,8 @@ const Register = () => {
       if (response.status === 200) {
         // Successful registration
         const data = await response.json();
+        console.log("Customer ID:", data.customerId);
+
         toast.success("User registered successfully!");
         console.log(data);
         // Optionally redirect the user or perform other actions
